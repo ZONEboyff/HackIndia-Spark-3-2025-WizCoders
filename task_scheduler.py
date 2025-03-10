@@ -62,6 +62,9 @@ def get_task(name):
     else:
         return None
 
+def get_all_tasks():
+    pattern = metta.parse_single(f'(Task $x $y $z)')
+
 def add_dep():
     dep = input("Enter the dependent task name: ")
     next = input("Enter the task name on which {} is dependent on: ".format(dep))
@@ -81,8 +84,33 @@ def sort_tasks():
 def give_optimal_schedule():
     pass
 
+def delete_dependencies(atom):
+    name = atom.get_children()[1]
+    pattern1 = metta.parse_single(f"({name} depends $x)")
+    query1= metta.space().query(pattern=pattern1)
+    if query1:
+        for query in query1:
+            dep_atom = metta.parse_single(f"({name} depends {query['x']})")
+            metta.space().remove_atom(dep_atom)
+
+    pattern2 = metta.parse_single(f"($y depends {name})")
+    query2= metta.space().query(pattern=pattern2)
+    if query2:
+        for query in query2:
+            dep_atom = metta.parse_single(f"({query['y']} depends {name})")
+            metta.space().remove_atom(dep_atom)
+
 
 def delete_tasks():
+    name = input('Enter task name to delete: ')
+    atom = get_task(name)
+    if atom:
+        metta.space().remove_atom(atom)
+        delete_dependencies(atom)
+    else:
+        print("Task Not Found")
+
+def show_network():
     pass
 
 
@@ -95,7 +123,8 @@ def main():
         print("3. Update a Task")
         print("4. View Optimal Schedule")
         print("5. Delete a Task")
-        print("6. Exit")
+        print("6. Show Network")
+        print("7. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -115,7 +144,7 @@ def main():
             case "5":
                 delete_tasks()
 
-            case "6":
+            case "7":
                 update_space()
                 break
 
