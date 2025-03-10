@@ -34,16 +34,6 @@ TaskExpert is a smart task scheduling app designed to streamline your workflow. 
    python main.py
    ```
 
-## Usage
-1. Add tasks dynamically with dependencies:
-   ```python
-   add_task("TaskA", "2025-03-10", "High")
-   add_task("TaskB", "2025-03-12", "Medium", ["TaskA"])
-   ```
-2. Query task dependencies:
-   ```python
-   query_dependencies("TaskB")
-   ```
 
 ## Future Enhancements
 - **Transitive Dependency Resolution**: Automatically detect and manage indirect dependencies.
