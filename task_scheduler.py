@@ -53,12 +53,21 @@ def update_tasks():
     else:
         print("Task Not Found")
 
+
 def get_task(name):
     pattern = metta.parse_single(f'(Task \"{name}\" $x $y)')
-    query= metta.space().query(pattern=pattern)
-    if query:
-        atom = metta.parse_single(f"(Task \"{name}\" {query[0]['x']} {query[0]['y']})")
+    print(pattern)
+    query = metta.space().query(pattern=pattern)
+    result = metta.run(f'! (match &self (Task \"{name}\" $x $y) ($x $y))')
+    print(result[0])
+    if result[0]:
+        result = result[0][0].get_children()
+        atom = metta.parse_single(f"(Task \"{name}\" {result[0]} {result[1]})")
         return atom
+    # print(result)
+    # print(type(result))
+    # print(type(next(q)))
+
     else:
         return None
 
@@ -109,6 +118,10 @@ def delete_tasks():
         delete_dependencies(atom)
     else:
         print("Task Not Found")
+
+def list_tasks():
+    result = metta.run(f'! (match &self (Task $x $y $z) ($x $y $z))')
+    return result[0]
 
 def show_network():
     pass
