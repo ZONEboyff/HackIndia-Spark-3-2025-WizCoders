@@ -3,19 +3,20 @@
 TaskExpert is a smart task scheduling app designed to streamline your workflow. With all your tasks scheduled in advance, you can focus on getting things done without the stress of deciding what to do next. Tasks are prioritized and scheduled based on deadlines, urgency, and dependencies—ensuring that prerequisite tasks are completed before others.
 
 ## Features
-- **Automated Task Scheduling**: Tasks are automatically scheduled based on priority and dependencies.
-- **Dependency Management**: Ensures prerequisite tasks are completed before dependent tasks.
-- **Deadline-Based Prioritization**: Urgent tasks are prioritized to meet deadlines.
-- **Graph-Based Representation**: Uses MeTTa language and AtomSpace for efficient task organization.
 
-## Technologies Used
-- **MeTTa**: A declarative and functional programming language for knowledge graphs.
-- **AtomSpace**: A knowledge graph representation for managing tasks and dependencies.
-- **Python Integration**: For interacting with MeTTa and dynamic task handling.
 
-## Getting Started
-### Prerequisites
-- Python 3.x
+## Architecture
+- **src/task_model.py**: Task data model
+- **src/storage.py**: Persistent storage (MeTTa/Hyperon)
+- **src/dependency.py**: Dependency and scheduling logic
+- **src/visualization.py**: Dependency graph visualization
+- **src/task_scheduler.py**: Main CLI entry point
+- **config/**: Configuration, environment, secrets (never committed)
+- **tests/**: Unit and integration tests
+- **docs/**: Architecture, design, and contribution docs
+- **scripts/**: Automation and utility scripts
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for details.
 - Hyperon MeTTa
 
 ### Installation

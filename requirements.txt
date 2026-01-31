@@ -1,0 +1,4 @@
+# requirements.txt
+hyperon-experimental
+networkx
+matplotlib
